@@ -1,0 +1,5 @@
+services:
+    itinance.twig.statemachine.twig_extension:
+        class: itinance\TinyStateMachine\Twig\StateMachineExtension
+        tags:
+            - { name: twig.extension }
