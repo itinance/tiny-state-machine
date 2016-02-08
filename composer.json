@@ -1,5 +1,6 @@
 {
   "name": "itinance/tiny-state-machine",
+  "license": "MIT",
   "authors": [
     {
       "name": "hagen huebel",
