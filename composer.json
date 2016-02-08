@@ -9,7 +9,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "itinance\\TinyStateMachine\\": "src/"
+      "itinance\\TinyStateMachine\\": "."
     }
   },
 
