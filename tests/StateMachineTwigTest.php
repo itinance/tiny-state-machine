@@ -61,4 +61,16 @@ class StateMachineTwigTests extends PHPUnit_Framework_TestCase
         $this->assertFalse($twigExtension->hasState('foo'));
         $this->assertTrue($twigExtension->hasState('FOO'));
     }
+
+    public function testHasStateWithValue()
+    {
+        $twigExtension = new StateMachineExtension();
+
+        $stateMachine = new StateMachine();
+        $stateMachine->setState('FOO', 'bar');
+
+        $this->assertTrue($twigExtension->hasStateWithValue('FOO', 'bar'));
+        $this->assertFalse($twigExtension->hasStateWithValue('NOT PRESENT', 'foobar'));
+    }
+
 }

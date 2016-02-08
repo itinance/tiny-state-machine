@@ -63,6 +63,7 @@ class StateMachineExtension extends Twig_Extension
         return array(
             new \Twig_SimpleFunction('hasState', [$this, 'hasState']),
             new \Twig_SimpleFunction('getState', [$this, 'getState']),
+            new \Twig_SimpleFunction('hasStateWithValue', [$this, 'hasStateWithValue']),
         );
     }
 
