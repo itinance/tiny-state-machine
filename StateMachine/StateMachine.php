@@ -1,5 +1,4 @@
 <?php
-
 /******************************************************************************
  *
  * (C) ITinance GmbH, 2015, Gauting & Munich, Germany
@@ -33,66 +32,90 @@
  *
  *****************************************************************************/
 
-namespace itinance\TinyStateMachine\Twig;
-
-use itinance\TinyStateMachine\StateMachine;
-use Twig_Extension;
+namespace itinance\TinyStateMachine\StateMachine;
 
 /**
- * Class StateMachineExtension
+ * Class StateMachine
  *
- * @package TinyStateMachine\Twig
+ * @package itinance\TinyStateMachine
  */
-class StateMachineExtension extends Twig_Extension
+class StateMachine
 {
     /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
+     * @var StateMachine
      */
-    public function getName ()
+    private static $instance = null;
+
+    /**
+     * @var array
+     */
+    private $states;
+
+    /**
+     * @param array $initialStates optional
+     */
+    public function __construct($initialStates = [])
     {
-        return 'StateMachine Extension';
+        if (static::$instance === null) {
+            static::$instance = $this;
+        }
+        $this->states = $initialStates;
     }
 
     /**
-     * @inheriteddocs
+     * @param string $stateName
+     * @param mixed  $value
+     * @return StateMachine
      */
-    public function getFunctions ()
+    public function setState($stateName, $value = null)
     {
-        return array(
-            new \Twig_SimpleFunction('hasState', [$this, 'hasState']),
-            new \Twig_SimpleFunction('getState', [$this, 'getState']),
-            new \Twig_SimpleFunction('hasStateWithValue', [$this, 'hasStateWithValue']),
-        );
+        $this->states[$stateName] = $value;
+
+        return $this;
     }
 
     /**
-     * @param $stateName
+     * @param string $stateName
+     * @param mixed  $default
+     * @return mixed
+     */
+    public function getState($stateName, $default = null)
+    {
+        return array_key_exists($stateName, $this->states) ? $this->states[$stateName] : $default;
+    }
+
+    /**
+     * @param string $stateName
      * @return bool
      */
     public function hasState($stateName)
     {
-        return StateMachine::instance()->hasState($stateName);
+        return array_key_exists($stateName, $this->states);
     }
 
     /**
-     * @param string $stateName
-     * @return mixed
-     */
-    public function getState($stateName)
-    {
-        return StateMachine::instance()->getState($stateName);
-    }
-
-    /**
-     * @param string $stateName
-     * @param mixed $value
+     * @param $stateName
+     * @param $value
      * @return bool
      */
     public function hasStateWithValue($stateName, $value)
     {
-        return StateMachine::instance()->hasStateWithValue($stateName, $value);
+        if (array_key_exists($stateName, $this->states)) {
+            return $this->states[$stateName] === $value;
+        }
+
+        return false;
     }
 
+    /**
+     * @return StateMachine
+     */
+    static public function instance()
+    {
+        if (static::$instance === null) {
+            return new StateMachine();
+        }
+
+        return static::$instance;
+    }
 }

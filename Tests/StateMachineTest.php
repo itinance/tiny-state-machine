@@ -32,7 +32,7 @@
  *
  *****************************************************************************/
 
-use itinance\TinyStateMachine\StateMachine;
+use itinance\TinyStateMachine\StateMachine\StateMachine;
 
 /**
  * Class StateMachineTests

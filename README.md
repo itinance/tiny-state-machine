@@ -1,5 +1,10 @@
 # TinyStateMachine
 
+## Installation
+
+composer require itinance/tiny-state-machine
+
+## Usage
 
 This StateMachine enables to set some state in an application and to request this state elsewhere, even in Twig.
 

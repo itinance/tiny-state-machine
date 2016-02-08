@@ -32,8 +32,8 @@
  *
  *****************************************************************************/
 
-use itinance\TinyStateMachine\StateMachine;
-use itinance\TinyStateMachine\Twig\StateMachineExtension;
+use itinance\TinyStateMachine\StateMachine\StateMachine;
+use itinance\TinyStateMachine\StateMachine\Twig\StateMachineExtension;
 
 /**
  * Class StateMachineTwigTests
